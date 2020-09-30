@@ -1,5 +1,5 @@
 App = {
-  web3Provider: null,
+  web3Provider1: null,
   contracts: {},
   account: '0x0',
   hasVoted: false,
@@ -12,12 +12,12 @@ App = {
     // TODO: refactor conditional
     if (typeof web3 !== 'undefined') {
       // If a web3 instance is already provided by Meta Mask.
-      App.web3Provider = web3.currentProvider;
+      App.web3Provider1 = web3.currentProvider;
       web3 = new Web3(web3.currentProvider);
     } else {
       // Specify default instance if no web3 instance provided
-      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
-      web3 = new Web3(App.web3Provider);
+      App.web3Provider1 = new Web3.providers.HttpProvider('http://localhost:7545');
+      web3 = new Web3(App.web3Provider1);
     }
     return App.initContract();
   },
@@ -27,7 +27,7 @@ App = {
       // Instantiate a new truffle contract from the artifact
       App.contracts.Election = TruffleContract(election);
       // Connect provider to interact with contract
-      App.contracts.Election.setProvider(App.web3Provider);
+      App.contracts.Election.setProvider(App.web3Provider1);
 
       App.listenForEvents();
 
@@ -61,10 +61,10 @@ App = {
     content.hide();
 
     // Load account data
-    web3.eth.getCoinbase(function(err, account) {
-      if (err === null) {
-        App.account = account;
-        $("#accountAddress").html("Your Account: " + account);
+    web3.eth.getCoinbase(function(err1, account1) {
+      if (err1 === null) {
+        App.account = account1;
+        $("#accountAddress").html("Your Account: " + account1);
       }
     });
 
